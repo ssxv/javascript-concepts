@@ -13,7 +13,7 @@
 
 
 Array.prototype.forEach = function (callback, thisArg) {
-    if (this == null ) {
+    if (this == null) {
         throw new TypeError('Array.prototype.forEach called on null or undefined')
     }
 

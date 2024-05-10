@@ -7,13 +7,13 @@
 
 
 // compilation vs interpretation vs just-in-time compilation
-// 1. Compilation: Entire source code is converted to Machine code and then run it is execulated later point in time
-// 2. Interpretation: Code is converted to machine code and then immediately executed line by line. convertion to machine code and exution happens line by line. This is slow
-// 3. Just in time Compilation: Entire source code converted to machine code as once and then executed immadiately
+// 1. Compilation: Source code is converted to machine code.
+// 2. Interpretation: Source code is converted to machine code and then immediately executed line by line. This is slow.
+// 3. Just-in-time Compilation: Source code converted to machine code at once and then executed immadiately.
 
 // In JS engine following steps happen
-// 1. Parsing --> code is read line by line and then converted to AST datastructure
-// 2. Compilation --> code is converted into machine code
-// 3. Execution --> happens immediately after compilation in call stack
+// 1. Parsing       --> code is read line by line and then converted to AST datastructure
+// 2. Compilation   --> code is converted into machine code
+// 3. Execution     --> happens immediately after compilation in call stack
 
-// runtime is a combination of js engine and web api and callback queue (DOM, Timers, Fetch API etc)
+// Runtime is a combination of js engine and web api and callback queue (DOM, Timers, Fetch API etc)

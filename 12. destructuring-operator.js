@@ -24,7 +24,7 @@ console.log(main, secondary) // Italian Vegiterian
 
 const nested = [2, 3, [4, 5]]
 const [i, , j] = nested
-const [a, ,[b,c]] = nested
+const [a, , [b, c]] = nested
 console.log(i, j) // 2 [4, 5]
 console.log(a, b, c) // 2 4 5
 

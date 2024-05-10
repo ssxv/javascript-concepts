@@ -2,7 +2,7 @@
 // even after that execution context is gone
 // this is nothing but a closure
 
-function securebooking () {
+function securebooking() {
     let passengerCount = 0
 
     return function () {

@@ -1,5 +1,5 @@
 /*
-In node js exvery file is considered as module
+In node js every file is considered as module
 Where does the require('test-module) comes from
 
 Wherever node encounters require('test-module) function following steps are executed

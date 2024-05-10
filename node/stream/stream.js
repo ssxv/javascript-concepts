@@ -23,7 +23,7 @@ server.on('request', (req, res) => {
     // })
 
     // Used solution without back pressure
-    const readableStream = fs.createReadStream(`${__dirname}/test-file.tsx`)
+    const readableStream = fs.createReadStream(`${__dirname}/test-file.txt`)
     readableStream.pipe(res)
 })
 

@@ -1,9 +1,6 @@
-// call method immediately calls the function.
-// First parameter to call method is the this object
-
 const A = {
     arr: [],
-    addToArr (el) {
+    addToArr(el) {
         this.arr.push(el)
     }
 }
@@ -12,19 +9,24 @@ const B = {
     arr: []
 }
 
-A.addToArr.call(B, 'BForst')
-A.addToArr('first')
+// Calls a method of an object, substituting another object for the current object.
+// @param thisArg — The object to be used as the current object.
+// @param argArray — A list of arguments to be passed to the method.
+A.addToArr.call(B, 'BFirst')
+A.addToArr('AFirst')
 
-// apply also calls the functoin immedietly
-// first parameter to apply is this object and second parameter is an array of params function accepts
+// Calls the function, substituting the specified object for the this value of the function, 
+// and the specified array for the arguments of the function.
+// @param thisArg — The object to be used as the this object.
+// @param argArray — A set of arguments to be passed to the function.
+A.addToArr.apply(B, ['BSecond'])
 
-A.addToArr.apply(B, ['BSec'])
-
-// bind returns a new function with binded parameter
-// it does not call the function immedietly
-
+// For a given function, creates a bound function that has the same body as the original function.
+// The this object of the bound function is associated with the specified object, 
+// and has the specified initial parameters.
+// @param thisArg — An object to which the this keyword can refer inside the new function.
+// @param argArray — A list of arguments to be passed to the new function.
 const addToArr_B = A.addToArr.bind(B)
-
 addToArr_B('BThird')
 
 console.log(A)

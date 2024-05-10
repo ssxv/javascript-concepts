@@ -1,13 +1,15 @@
-// Each function has property named prototype
-// all the objects created with constructor function will get access to constructor functions prototype
-// object does not have prototype. It can access the prototype of the parent function constructor using obj.__proto__
-// 
+// All functions have a property named prototype
+// All the objects created with constructor function will get access to constructor functions prototype
+// An Object does not have prototype. However, it can access the prototype of the parent function constructor using obj.__proto__
 
+// Constructor function
 const Person = function (firstname, lastname) {
     this.firstname = firstname
     this.lastname = lastname
 }
 
+// calcAge is added to Person functions prototype, 
+// thus making it available to all the objects that will be created using Person constructor function
 Person.prototype.calcAge = function () {
     console.log(2024 - this.birthYear)
 }
@@ -19,10 +21,10 @@ rohit.calcAge()
 
 // Object.assign directly creates an object with prototye of assigned object
 const PersonProto = {
-    calcAge () {
+    calcAge() {
         console.log(2024 - this.birthYear)
     },
-    init (firstname, lastname) {
+    init(firstname, lastname) {
         this.firstname = firstname
         this.lastname = lastname
     }
@@ -40,7 +42,7 @@ const Student = function (firstname, lastname, course) {
 }
 
 Student.prototype = Object.create(Person.prototype)
-Student.prototype.constructor = Student 
+Student.prototype.constructor = Student
 
 Student.prototype.introduce = function () {
     console.log(`My name is ${this.firstname} and I study ${this.course}`)
@@ -54,6 +56,3 @@ mike.calcAge()
 console.log(mike instanceof Student)
 console.log(mike instanceof Person)
 console.log(mike instanceof Object)
-
-
-

@@ -1,58 +1,61 @@
-// All functions have a property named prototype
-// All the objects created with constructor function will get access to constructor functions prototype
-// An Object does not have prototype. However, it can access the prototype of the parent function constructor using obj.__proto__
+// In JavaScript, inheritance is primarily achieved through prototype chaining. 
+// While the extends keyword introduced in ES6 (ECMAScript 2015) simplifies the syntax for inheritance, 
+// it's essential to understand the underlying mechanism of prototype-based inheritance to grasp the 
+// full power and flexibility of JavaScript's object-oriented capabilities. Here's an overview:
 
-// Constructor function
-const Person = function (firstname, lastname) {
-    this.firstname = firstname
-    this.lastname = lastname
+// Prototype-Based Inheritance:
+// Every JavaScript object has a prototype. 
+// Prototypes are essentially objects from which other objects inherit properties.
+
+// When you access a property or method on an object, JavaScript first looks for it on the object itself. 
+// If it doesn't find it there, it looks for it on the object's prototype. 
+// This process continues recursively up the prototype chain until it reaches the Object.prototype object, 
+// which is the final link in the chain.
+
+// Inheritance in JavaScript is achieved by setting the prototype property of one constructor function 
+// to an instance of another constructor function. This establishes a prototype chain, 
+// allowing objects created by the first constructor to inherit properties and methods from the 
+// prototype of the second constructor.
+
+// Constructor function is a special type of function used to create and initialize objects created 
+// with the new keyword.
+
+// Suppose we have a Person constructor function that defines a basic person object with 
+// name and age properties, along with a greet() method:
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
 }
 
-// calcAge is added to Person functions prototype, 
-// thus making it available to all the objects that will be created using Person constructor function
-Person.prototype.calcAge = function () {
-    console.log(2024 - this.birthYear)
+// When a method is added to the prototype, it is shared among all instances of the object. 
+// In contrast, if the method is added directly to the object within the constructor function, 
+// each instance would have its own copy of the method, leading to unnecessary memory consumption. 
+// By adding methods to the prototype, you ensure that all instances share the same method implementation, 
+// thus saving memory.
+Person.prototype.greet = function () {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+};
+
+// Now, let's create another constructor function called Student that inherits from Person
+function Student(name, age, school) {
+    Person.call(this, name, age); // Call the Person constructor to initialize name and age properties
+    this.school = school;
 }
 
-const rohit = new Person('Rohit', 'K')
-rohit.birthYear = 1994
-rohit.calcAge()
+Student.prototype = Object.create(Person.prototype); // Set Student's prototype to an instance of Person
+Student.prototype.constructor = Student; // Reset constructor to Student
 
+Student.prototype.study = function () {
+    console.log(`${this.name} is studying at ${this.school}.`);
+};
 
-// Object.assign directly creates an object with prototye of assigned object
-const PersonProto = {
-    calcAge() {
-        console.log(2024 - this.birthYear)
-    },
-    init(firstname, lastname) {
-        this.firstname = firstname
-        this.lastname = lastname
-    }
-}
+const john = new Person('John', 25);
+john.greet(); // Output: Hello, my name is John and I am 25 years old.
 
-const pranit = Object.create(PersonProto)
-pranit.init('Pranit', 'Khadilkar')
-pranit.birthYear = 1995
-pranit.calcAge()
+const alice = new Student('Alice', 20, 'XYZ University');
+alice.greet(); // Output: Hello, my name is Alice and I am 20 years old.
+alice.study(); // Output: Alice is studying at XYZ University.
 
-// Inheritance using constructor function
-const Student = function (firstname, lastname, course) {
-    Person.call(this, firstname, lastname)
-    this.course = course
-}
-
-Student.prototype = Object.create(Person.prototype)
-Student.prototype.constructor = Student
-
-Student.prototype.introduce = function () {
-    console.log(`My name is ${this.firstname} and I study ${this.course}`)
-}
-
-const mike = new Student('Mike', 'K', 'Arts')
-mike.birthYear = 1990
-mike.introduce()
-mike.calcAge()
-
-console.log(mike instanceof Student)
-console.log(mike instanceof Person)
-console.log(mike instanceof Object)
+console.log(alice instanceof Student)
+console.log(alice instanceof Person)
+console.log(alice instanceof Object)

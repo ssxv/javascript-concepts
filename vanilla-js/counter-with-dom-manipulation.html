@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script>
+
+        const counterApp = document.createElement('div');
+        
+        let counterValue = 0;
+        const setCounterValue = (updatedCounterValue) => {
+            counterValue = updatedCounterValue;
+            renderCounterApp();
+        }
+        
+        const renderCounterApp = () => {
+            counterApp.innerHTML = null;
+
+            const counterDisplay = document.createElement('span');
+            counterDisplay.innerText = counterValue;
+
+            const decrementButton = document.createElement('button');
+            decrementButton.innerText = "-";
+            decrementButton.disabled = counterValue <= 0;
+            decrementButton.addEventListener('click', (e) => {
+                setCounterValue(counterValue - 1);
+            });
+
+            const incrementButton = document.createElement('button');
+            incrementButton.innerText = "+";
+            incrementButton.disabled = counterValue >= 5;
+            incrementButton.addEventListener('click', (e) => {
+                setCounterValue(counterValue + 1);
+            });
+
+            counterApp.appendChild(decrementButton);
+            counterApp.appendChild(counterDisplay);
+            counterApp.appendChild(incrementButton);
+        }
+        
+        renderCounterApp();
+
+        const root = document.getElementById('root');
+        root.appendChild(counterApp);
+    </script>
+</body>
+
+</html>
